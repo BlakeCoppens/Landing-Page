@@ -1,150 +1,184 @@
 <!DOCTYPE HTML>
-<!--
-	Directive by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 <head>
-	<title>Blake Coppens Landing Page</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main.css" />
-	<style>
-		.edu-slide { display: none; }
-		.edu-slide.active { display: block; }
-		.dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; }
-		.dot.active { background: white; }
-	</style>
+    <title>Blake Coppens Landing Page</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <style>
+        .edu-slide { display: none; }
+        .edu-slide.active { display: block; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; }
+        .dot.active { background: white; }
+
+        /* Added styles for slideshow enhancement */
+        .slideshow-wrapper {
+            position: relative;
+            max-width: 700px; /* Adjust as needed */
+            margin: 0 auto; /* Center the slideshow */
+            overflow: hidden; /* Ensures content stays within bounds */
+            border-radius: 8px; /* Slightly rounded corners */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+        }
+        .slideshow-container {
+            display: flex; /* Arrange images in a row */
+            transition: transform 0.5s ease-in-out; /* Smooth slide transition */
+        }
+        .slideshow-container img {
+            width: 100%;
+            flex-shrink: 0; /* Prevents images from shrinking */
+            display: block;
+        }
+        .slideshow-wrapper button {
+            transition: background-color 0.3s ease; /* Smooth button hover effect */
+        }
+        .slideshow-wrapper button:hover {
+            background-color: rgba(0,0,0,0.7);
+        }
+        .dot-navigation {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10; /* Ensure dots are above images */
+        }
+    </style>
 </head>
 <body class="is-preload">
 
-	<!-- Header -->
-	<div id="header">
-		<img src="images/Headshot.jpeg">
-		<h1>Blake Coppens</h1>
-		<h2>Student @ University of Florida<br />Computer Science</h2>
-	</div>
+    <div id="header">
+        <img src="images/Headshot.jpeg" alt="Blake Coppens Headshot">
+        <h1>Blake Coppens</h1>
+        <h2>Student @ University of Florida<br />Computer Science</h2>
+    </div>
 
-	<!-- Main -->
-	<div id="main">
-		<header class="major container medium">
-			<h2>Skills</h2>
-			<h1>Semantic Kernel, OpenAI, DALL-E<br />Python, Microsoft MTA Java, C++<br />HTML, CSS</h1>
-		</header>
+    <div id="main">
+        <header class="major container medium">
+            <h2>Skills</h2>
+            <h1>Semantic Kernel, OpenAI, DALL-E<br />Python, Microsoft MTA Java, C++<br />HTML, CSS</h1>
+        </header>
 
-		<div class="box alt container">
-			<section class="feature left">
-				<a href="Blake Coppens Resume Updated.pdf"><img src="images/resume.JPG" alt="" style="width:480px;height:480px;" /></a>
-				<div class="content">
-					<h3>Resume</h3>
-					<p>Click here to open my resume</p>
-				</div>
-			</section>
-		</div>
+        <div class="box alt container">
+            <section class="feature left">
+                <a href="Blake Coppens Resume Updated.pdf"><img src="images/resume.JPG" alt="Resume thumbnail" style="width:480px;height:480px;" /></a>
+                <div class="content">
+                    <h3>Resume</h3>
+                    <p>Click here to open my resume</p>
+                </div>
+            </section>
+        </div>
 
-		<div class="box alt container">
-			<section class="feature left">
-				<a href="https://www.linkedin.com/in/blakecoppens/"><img src="images/Linkedin.jpg" alt="" style="width:480px;height:480px;" /></a>
-				<div class="content">
-					<h3>LinkedIn</h3>
-					<p>Click here to open my LinkedIn</p>
-				</div>
-			</section>
-		</div>
+        <div class="box alt container">
+            <section class="feature left">
+                <a href="https://www.linkedin.com/in/blakecoppens/"><img src="images/Linkedin.jpg" alt="LinkedIn logo" style="width:480px;height:480px;" /></a>
+                <div class="content">
+                    <h3>LinkedIn</h3>
+                    <p>Click here to open my LinkedIn</p>
+                </div>
+            </section>
+        </div>
 
-		<div class="box alt container">
-			<section class="feature left">
-				<a href="https://docs.google.com/spreadsheets/d/19zlLa5G1WLv4eOXFN6ilxFpu_NCJ99fHdLCieVRKkTw/edit?gid=0#gid=0"><img src="images/Project.JPG" alt="" style="width:480px;height:480px;" /></a>
-				<div class="content">
-					<h3>My Projects</h3>
-					<p>Click here to open my Projects</p>
-				</div>
-			</section>
-		</div>
+        <div class="box alt container">
+            <section class="feature left">
+                <a href="https://docs.google.com/spreadsheets/d/19zlLa5G1WLv4eOXFN6ilxFpu_NCJ99fHdLCieVRKkTw/edit?gid=0#gid=0"><img src="images/Project.JPG" alt="Project icon" style="width:480px;height:480px;" /></a>
+                <div class="content">
+                    <h3>My Projects</h3>
+                    <p>Click here to open my Projects</p>
+                </div>
+            </section>
+        </div>
 
-		<!-- EDU Africa Section -->
-		<div class="box alt container">
-			<section class="feature left">
-				<div class="slideshow-wrapper" style="position: relative;">
-					<div class="slideshow-container">
-						<img class="edu-slide active" src="images/edu1.jpg" style="width:100%;" />
-						<img class="edu-slide" src="images/edu2.jpg" style="width:100%;" />
-						<img class="edu-slide" src="images/edu3.jpg" style="width:100%;" />
-					</div>
-					<button onclick="prevSlide()" style="position:absolute;top:50%;left:10px;transform:translateY(-50%);background-color:rgba(0,0,0,0.5);color:white;border:none;padding:10px;border-radius:50%;">&#10094;</button>
-					<button onclick="nextSlide()" style="position:absolute;top:50%;right:10px;transform:translateY(-50%);background-color:rgba(0,0,0,0.5);color:white;border:none;padding:10px;border-radius:50%;">&#10095;</button>
-					<div style="position:absolute;bottom:15px;left:50%;transform:translateX(-50%);display:flex;gap:10px;">
-						<span class="dot active" onclick="setSlide(0)"></span>
-						<span class="dot" onclick="setSlide(1)"></span>
-						<span class="dot" onclick="setSlide(2)"></span>
-					</div>
-				</div>
+        <div class="box alt container">
+            <section class="feature left">
+                <div class="slideshow-wrapper">
+                    <div class="slideshow-container">
+                        <img class="edu-slide active" src="images/edu1.jpg" alt="EDU Africa slide 1" />
+                        <img class="edu-slide" src="images/edu2.jpg" alt="EDU Africa slide 2" />
+                        <img class="edu-slide" src="images/edu3.jpg" alt="EDU Africa slide 3" />
+                    </div>
+                    <button onclick="prevSlide()" style="position:absolute;top:50%;left:10px;transform:translateY(-50%);background-color:rgba(0,0,0,0.5);color:white;border:none;padding:10px;border-radius:50%;">&#10094;</button>
+                    <button onclick="nextSlide()" style="position:absolute;top:50%;right:10px;transform:translateY(-50%);background-color:rgba(0,0,0,0.5);color:white;border:none;padding:10px;border-radius:50%;">&#10095;</button>
+                    <div class="dot-navigation">
+                        <span class="dot active" onclick="setSlide(0)"></span>
+                        <span class="dot" onclick="setSlide(1)"></span>
+                        <span class="dot" onclick="setSlide(2)"></span>
+                    </div>
+                </div>
 
-				<div class="content">
-					<h3>EDU Africa</h3>
-					<p><em>"Live as if you were to die tomorrow. Learn as if you were to live forever."</em></p>
+                <div class="content">
+                    <h3>EDU Africa</h3>
+                    <p><em>"Live as if you were to die tomorrow. Learn as if you were to live forever."</em></p>
 
-					<h4>Project Overview</h4>
-					<p>During my time with EDU Africa, I took part in a service-learning experience that broadened my understanding of cultural awareness, global community needs, and the intersection of technology and social good.</p>
+                    <h4>Project Overview</h4>
+                    <p>During my time with EDU Africa, I took part in a service-learning experience that broadened my understanding of cultural awareness, global community needs, and the intersection of technology and social good.</p>
 
-					<h4>Key Achievements</h4>
-					<p>Developed cross-cultural communication, leadership, and adaptability skills while implementing a digital literacy module for students using open-source tools and gamified learning.</p>
+                    <h4>Key Achievements</h4>
+                    <p>Developed cross-cultural communication, leadership, and adaptability skills while implementing a digital literacy module for students using open-source tools and gamified learning.</p>
 
-					<h4>Lessons Learned</h4>
-					<ul>
-						<li>Flexibility and humility are essential in global work</li>
-						<li>Listen more than you speak; communities know their needs best</li>
-						<li>Small skills can have big impacts when shared with others</li>
-					</ul>
+                    <h4>Lessons Learned</h4>
+                    <ul>
+                        <li>Flexibility and humility are essential in global work</li>
+                        <li>Listen more than you speak; communities know their needs best</li>
+                        <li>Small skills can have big impacts when shared with others</li>
+                    </ul>
 
-					<h4>Acknowledgements</h4>
-					<p>Special thanks to Dr. Sanethia Thomas, Ping Neo, Naomi Harrell, EDU Africa, and the Serving Organization Team.</p>
-				</div>
-			</section>
-		</div>
+                    <h4>Acknowledgements</h4>
+                    <p>Special thanks to Dr. Sanethia Thomas, Ping Neo, Naomi Harrell, EDU Africa, and the Serving Organization Team.</p>
+                </div>
+            </section>
+        </div>
 
-		<!-- Contact -->
-		<footer class="major container medium">
-			<h3>Contact Me</h3>
-			<ul class="actions special">
-				<li><a href="mailto:blakecoppensbusiness@gmail.com" class="button">Email</a></li>
-			</ul>
-		</footer>
-	</div>
+        <footer class="major container medium">
+            <h3>Contact Me</h3>
+            <ul class="actions special">
+                <li><a href="mailto:blakecoppensbusiness@gmail.com" class="button">Email</a></li>
+            </ul>
+        </footer>
+    </div>
 
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
 
-	<script>
-		let currentSlide = 0;
-		const slides = document.querySelectorAll(".edu-slide");
-		const dots = document.querySelectorAll(".dot");
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll(".edu-slide");
+        const dots = document.querySelectorAll(".dot");
+        const slideshowContainer = document.querySelector(".slideshow-container");
 
-		function showSlide(index) {
-			slides.forEach((slide, i) => {
-				slide.classList.toggle("active", i === index);
-				dots[i].classList.toggle("active", i === index);
-			});
-			currentSlide = index;
-		}
+        function showSlide(index) {
+            if (index >= slides.length) currentSlide = 0;
+            else if (index < 0) currentSlide = slides.length - 1;
+            else currentSlide = index;
 
-		function nextSlide() {
-			showSlide((currentSlide + 1) % slides.length);
-		}
+            slideshowContainer.style.transform = `translateX(${-currentSlide * 100}%)`;
 
-		function prevSlide() {
-			showSlide((currentSlide - 1 + slides.length) % slides.length);
-		}
+            dots.forEach((dot, i) => {
+                dot.classList.toggle("active", i === currentSlide);
+            });
+        }
 
-		function setSlide(index) {
-			showSlide(index);
-		}
-	</script>
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        function setSlide(index) {
+            showSlide(index);
+        }
+
+        // Initialize the first slide
+        document.addEventListener("DOMContentLoaded", () => {
+            showSlide(0);
+        });
+    </script>
 
 </body>
 </html>
