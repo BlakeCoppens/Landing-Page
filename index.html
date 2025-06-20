@@ -44,6 +44,12 @@
             gap: 10px;
             z-index: 10; /* Ensure dots are above images */
         }
+
+        /* Responsive image styling for the feature sections */
+        .feature img {
+            max-width: 100%; /* Make images responsive within their container */
+            height: auto; /* Maintain aspect ratio */
+        }
     </style>
 </head>
 <body class="is-preload">
@@ -62,30 +68,39 @@
 
         <div class="box alt container">
             <section class="feature left">
-                <a href="Blake Coppens Resume Updated.pdf"><img src="images/resume.JPG" alt="Resume thumbnail" style="width:480px;height:480px;" /></a>
+                <a href="Blake Coppens Resume Updated.pdf" aria-label="Open Resume PDF"><img src="images/resume.JPG" alt="Resume thumbnail" /></a>
                 <div class="content">
                     <h3>Resume</h3>
-                    <p>Click here to open my resume</p>
+                    <p>My detailed professional background, education, and experience.</p>
+                    <ul class="actions small">
+                        <li><a href="Blake Coppens Resume Updated.pdf" class="button">View Resume</a></li>
+                    </ul>
                 </div>
             </section>
         </div>
 
         <div class="box alt container">
             <section class="feature left">
-                <a href="https://www.linkedin.com/in/blakecoppens/"><img src="images/Linkedin.jpg" alt="LinkedIn logo" style="width:480px;height:480px;" /></a>
+                <a href="https://www.linkedin.com/in/blakecoppens/" aria-label="Visit Blake Coppens LinkedIn Profile"><img src="images/Linkedin.jpg" alt="LinkedIn logo" /></a>
                 <div class="content">
                     <h3>LinkedIn</h3>
-                    <p>Click here to open my LinkedIn</p>
+                    <p>Connect with me on LinkedIn to see my professional network and endorsements.</p>
+                    <ul class="actions small">
+                        <li><a href="https://www.linkedin.com/in/blakecoppens/" class="button">Connect on LinkedIn</a></li>
+                    </ul>
                 </div>
             </section>
         </div>
 
         <div class="box alt container">
             <section class="feature left">
-                <a href="https://docs.google.com/spreadsheets/d/19zlLa5G1WLv4eOXFN6ilxFpu_NCJ99fHdLCieVRKkTw/edit?gid=0#gid=0"><img src="images/Project.JPG" alt="Project icon" style="width:480px;height:480px;" /></a>
+                <a href="https://docs.google.com/spreadsheets/d/19zlLa5G1WLv4eOXFN6ilxFpu_NCJ99fHdLCieVRKkTw/edit?gid=0#gid=0" aria-label="View Blake Coppens Projects"><img src="images/Project.JPG" alt="Project icon" /></a>
                 <div class="content">
                     <h3>My Projects</h3>
-                    <p>Click here to open my Projects</p>
+                    <p>Explore a collection of my personal and academic projects.</p>
+                    <ul class="actions small">
+                        <li><a href="https://docs.google.com/spreadsheets/d/19zlLa5G1WLv4eOXFN6ilxFpu_NCJ99fHdLCieVRKkTw/edit?gid=0#gid=0" class="button">View Projects</a></li>
+                    </ul>
                 </div>
             </section>
         </div>
@@ -98,8 +113,8 @@
                         <img class="edu-slide" src="images/edu2.jpg" alt="EDU Africa slide 2" />
                         <img class="edu-slide" src="images/edu3.jpg" alt="EDU Africa slide 3" />
                     </div>
-                    <button onclick="prevSlide()" style="position:absolute;top:50%;left:10px;transform:translateY(-50%);background-color:rgba(0,0,0,0.5);color:white;border:none;padding:10px;border-radius:50%;">&#10094;</button>
-                    <button onclick="nextSlide()" style="position:absolute;top:50%;right:10px;transform:translateY(-50%);background-color:rgba(0,0,0,0.5);color:white;border:none;padding:10px;border-radius:50%;">&#10095;</button>
+                    <button onclick="prevSlide()" style="position:absolute;top:50%;left:10px;transform:translateY(-50%);background-color:rgba(0,0,0,0.5);color:white;border:none;padding:10px;border-radius:50%;cursor:pointer;">&#10094;</button>
+                    <button onclick="nextSlide()" style="position:absolute;top:50%;right:10px;transform:translateY(-50%);background-color:rgba(0,0,0,0.5);color:white;border:none;padding:10px;border-radius:50%;cursor:pointer;">&#10095;</button>
                     <div class="dot-navigation">
                         <span class="dot active" onclick="setSlide(0)"></span>
                         <span class="dot" onclick="setSlide(1)"></span>
@@ -130,13 +145,15 @@
             </section>
         </div>
 
-        <footer class="major container medium">
-            <h3>Contact Me</h3>
-            <ul class="actions special">
-                <li><a href="mailto:blakecoppensbusiness@gmail.com" class="button">Email</a></li>
-            </ul>
-        </footer>
     </div>
+
+    <footer id="contact-footer" class="major container medium">
+        <h3>Contact Me</h3>
+        <ul class="actions special">
+            <li><a href="mailto:blakecoppensbusiness@gmail.com" class="button">Email</a></li>
+        </ul>
+    </footer>
+
 
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/browser.min.js"></script>
