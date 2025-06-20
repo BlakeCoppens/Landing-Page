@@ -3300,3 +3300,7 @@ input, select, textarea {
 				}
 
 	}
+	.feature img {
+    max-width: 100%;
+    height: auto;
+}
