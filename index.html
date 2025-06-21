@@ -168,13 +168,6 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
         }
-
-        .skill-tag:hover {
-            background: #7c3aed;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-        }
-
         /* Portfolio Section */
         .portfolio-section {
             padding: 5rem 0;
@@ -543,15 +536,15 @@
                 <div class="section-header">
                     <h2 class="section-title">Technical Expertise</h2>
                     <div class="skills-grid">
-                        <div class="skill-tag">Semantic Kernel</div>
-                        <div class="skill-tag">OpenAI</div>
-                        <div class="skill-tag">DALL-E</div>
                         <div class="skill-tag">Python</div>
                         <div class="skill-tag">Java</div>
                         <div class="skill-tag">C++</div>
-                        <div class="skill-tag">HTML</div>
-                        <div class="skill-tag">CSS</div>
-                        <div class="skill-tag">JavaScript</div>
+                        <div class="skill-tag">Javascript</div>
+                        <div class="skill-tag">REST</div>
+                        <div class="skill-tag">PHP</div>
+                        <div class="skill-tag">PostgreSQL</div>
+                        <div class="skill-tag">HTML/CSS</div>
+                        <div class="skill-tag">Linux</div>
                         <div class="skill-tag">Machine Learning</div>
                     </div>
                 </div>
@@ -616,58 +609,71 @@
 
                     <!-- EDU Africa Card -->
                     <div class="portfolio-card edu-africa">
-                        <div class="card-layout">
-                            <div class="slideshow-wrapper">
-                                <div class="slideshow-container" id="slideshowContainer">
-                                    <div class="slide">
-                                        <img src="images/edu1.jpg" alt="EDU Africa Experience 1">
-                                    </div>
-                                    <div class="slide">
-                                        <img src="images/edu2.jpg" alt="EDU Africa Experience 2">
-                                    </div>
-                                    <div class="slide">
-                                        <img src="images/edu3.jpg" alt="EDU Africa Experience 3">
-                                    </div>
-                                </div>
-                                <button class="slide-nav prev" onclick="changeSlide(-1)">‹</button>
-                                <button class="slide-nav next" onclick="changeSlide(1)">›</button>
-                                <div class="slide-indicators">
-                                    <span class="indicator active" onclick="currentSlide(1)"></span>
-                                    <span class="indicator" onclick="currentSlide(2)"></span>
-                                    <span class="indicator" onclick="currentSlide(3)"></span>
-                                </div>
-                            </div>
-                            <div class="card-content">
-                                <h3 class="card-title">EDU Africa Experience</h3>
-                                <p class="card-description">
-                                    <em>"Live as if you were to die tomorrow. Learn as if you were to live forever."</em>
-                                </p>
-                                
-                                <h4 class="card-subtitle">Project Overview</h4>
-                                <p class="card-description">
-                                    Transformative service-learning experience that expanded my understanding of cultural awareness, global community needs, and the intersection of technology and social impact.
-                                </p>
+						<div class="card-layout">
+							<div class="slideshow-wrapper">
+								<div class="slideshow-container" id="slideshowContainer">
+									<div class="slide">
+										<img src="images/edu1.jpg" alt="EDU Africa Experience 1">
+									</div>
+									<div class="slide">
+										<img src="images/edu2.jpg" alt="EDU Africa Experience 2">
+									</div>
+									<div class="slide">
+										<img src="images/edu3.jpg" alt="EDU Africa Experience 3">
+									</div>
+								</div>
+								<button class="slide-nav prev" onclick="changeSlide(-1)">‹</button>
+								<button class="slide-nav next" onclick="changeSlide(1)">›</button>
+								<div class="slide-indicators">
+									<span class="indicator active" onclick="currentSlide(1)"></span>
+									<span class="indicator" onclick="currentSlide(2)"></span>
+									<span class="indicator" onclick="currentSlide(3)"></span>
+								</div>
+							</div>
+							<div class="card-content">
+								<h3 class="card-title">EDU Africa Experience</h3>
+								<p class="card-description">
+									<em>"Live as if you were to die tomorrow. Learn as if you were to live forever."</em>
+								</p>
 
-                                <h4 class="card-subtitle">Key Achievements</h4>
-                                <p class="card-description">
-                                    Developed cross-cultural communication, leadership, and adaptability skills while implementing digital literacy modules using open-source tools and gamified learning approaches.
-                                </p>
+								<h4 class="card-subtitle">Project Overview</h4>
+								<p class="card-description">
+									Created a full Stack LMS for YMCA Athlone, South Africa, which focused on addressing the digital divide in underserved communities. The project involved using APIs, open-source tools, LAMP stack and more to create an intuitive platform for learners.
+								</p>
 
-                                <h4 class="card-subtitle">Lessons Learned</h4>
-                                <ul class="card-list">
-                                    <li>Flexibility and humility are essential in global work</li>
-                                    <li>Listen more than you speak; communities know their needs best</li>
-                                    <li>Small skills can have big impacts when shared with others</li>
-                                    <li>Technology solutions must be culturally sensitive and locally relevant</li>
-                                </ul>
+								<h4 class="card-subtitle">Global Learning, Skills Acquired & Achievements</h4>
+								<p class="card-description">
+									One of the most impactful parts of this experience was learning how to adapt my technical knowledge to suit users with varying levels of digital and traditional literacy. Designing for accessibility forced me to think more critically about user experience and simplicity. I also developed leadership skills by guiding a small team through tight deadlines and cross-cultural collaboration. From debugging backend issues to optimizing frontend responsiveness, the hands-on coding experience refined both my technical skillset and my ability to deliver real-world solutions under pressure.
+								</p>
 
-                                <h4 class="card-subtitle">Acknowledgements</h4>
-                                <p class="card-description">
-                                    Special thanks to Dr. Sanethia Thomas, Ping Neo, Naomi Harrell, EDU Africa, and the entire Serving Organization Team.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+								<h4 class="card-subtitle">Highlights & Reflections</h4>
+								<p class="card-description">
+									One of the most profound aspects of this journey was spending time with the local communities and directly engaging with the students our platform was built to support. Seeing their curiosity and excitement when using the tools we created made the impact of our work feel incredibly real. It reminded me that software development isn’t just about code—it’s about people. Witnessing firsthand how technology can open new doors for those affected by the digital divide was deeply humbling, and it reinforced my belief that thoughtful, inclusive innovation can inspire both local and global change.
+								</p>
+
+								<h4 class="card-subtitle">Most Memorable Experience</h4>
+								<p class="card-description">
+									Visiting Khayelitsha was one of the most eye-opening moments of the entire trip. Walking through the township, I saw the stark reality of informal settlements—homes built from scrap material, limited access to infrastructure, and challenging living conditions. Yet, in the midst of hardship, what stood out most was the resilience and spirit of the people. There was an undeniable sense of community, innovation, and determination to thrive despite systemic challenges. It shifted my perspective entirely and made me more conscious of the privilege I have. More importantly, it deepened my commitment to using technology as a tool for empowerment and equity.
+								</p>
+
+								<h4 class="card-subtitle">Lessons Learned, Advice & Tips</h4>
+								<ul class="card-list">
+									<li>Adaptability is your greatest tool</li>
+									<li>Learning your client and how your project affects them is a powerful tool</li>
+									<li>Keep an open mind while developing and don't be afraid to pivot</li>
+									<li>Coding isn't only for apps, it can also be solutions to real problems</li>
+									<li><strong>Advice:</strong>Follow AGILE methodologies, they exist for a reason</li>
+									<li><strong>Tip:</strong> Communicate constantly with your team.</li>
+								</ul>
+
+								<h4 class="card-subtitle">Acknowledgements</h4>
+								<p class="card-description">
+									Special thanks to Dr. Sanethia Thomas, Ping Neo, Naomi Harrell, EDU Africa, and the entire Serving Organization Team.
+								</p>
+							</div>
+						</div>
+					</div>
+
                 </div>
             </div>
         </section>
