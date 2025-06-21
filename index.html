@@ -1,347 +1,857 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <head>
-  <title>Blake Coppens Landing Page</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-  <link rel="stylesheet" href="assets/css/main.css" />
-  <style>
-    .uniform-icon {
-      width: 100px;
-      height: 100px;
-      object-fit: contain;
-      display: block;
-      margin: 0 auto 1em auto;
-      border-radius: 8px;
-    }
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blake Coppens - Computer Science Student</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
-    .edu-slide { display: none; }
-    .edu-slide.active { display: block; }
+        /* CSS Custom Properties - Purple & Dark Gray Theme */
+        :root {
+            --primary-purple: #8b5cf6;
+            --primary-purple-light: #a78bfa;
+            --primary-purple-dark: #7c3aed;
+            --secondary-purple: #c4b5fd;
+            
+            --dark-gray-900: #111827;
+            --dark-gray-800: #1f2937;
+            --dark-gray-700: #374151;
+            --dark-gray-600: #4b5563;
+            --dark-gray-500: #6b7280;
+            --dark-gray-400: #9ca3af;
+            --dark-gray-300: #d1d5db;
+            --dark-gray-200: #e5e7eb;
+            --dark-gray-100: #f3f4f6;
+            
+            --terminal-green: #00ff41;
+            --terminal-green-dim: #00cc33;
+            
+            --white: #ffffff;
+            --black: #000000;
+            
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            
+            --border-radius: 0.75rem;
+            --border-radius-lg: 1rem;
+            --border-radius-xl: 1.5rem;
+        }
 
-    .dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.5);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border: 2px solid transparent;
-    }
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .dot:hover {
-      background: rgba(255,255,255,0.8);
-      transform: scale(1.2);
-    }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    .dot.active {
-      background: #2d2d2d;
-      border-color: white;
-      transform: scale(1.3);
-    }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray-700);
+            background: var(--white);
+            overflow-x: hidden;
+        }
 
-    .slideshow-wrapper {
-      position: relative;
-      max-width: 700px;
-      margin: 0 auto;
-      overflow: hidden;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
+        /* Terminal Loading Screen */
+        .terminal-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
 
-    .slideshow-container {
-      display: flex;
-      transition: transform 0.5s ease-in-out;
-    }
+        .terminal-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
 
-    .slideshow-container img {
-      width: 100%;
-      flex-shrink: 0;
-      display: block;
-    }
+        .terminal-content {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--terminal-green);
+            font-size: 1.2rem;
+            max-width: 600px;
+            padding: 2rem;
+        }
 
-    .slideshow-wrapper button {
-      transition: all 0.3s ease;
-    }
+        .terminal-line {
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            animation: fadeInLine 0.5s ease forwards;
+        }
 
-    .slideshow-wrapper button:hover {
-      background-color: rgba(0,0,0,0.7);
-      transform: translateY(-50%) scale(1.1);
-    }
+        .terminal-line.visible {
+            opacity: 1;
+        }
 
-    .dot-navigation {
-      position: absolute;
-      bottom: 15px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 10px;
-      z-index: 10;
-    }
+        .cursor {
+            display: inline-block;
+            background: var(--terminal-green);
+            width: 2px;
+            height: 1.2em;
+            animation: blink 1s infinite;
+            margin-left: 2px;
+        }
 
-    .button, 
-    input[type="submit"],
-    input[type="reset"],
-    input[type="button"] {
-      background: linear-gradient(135deg, #2d2d2d 0%, #1f1f1f 100%);
-      border: none;
-      border-radius: 6px;
-      color: #ffffff;
-      cursor: pointer;
-      display: inline-block;
-      font-size: 0.9em;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      line-height: 1;
-      padding: 1em 2em;
-      text-align: center;
-      text-decoration: none;
-      text-transform: uppercase;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-      min-width: 140px;
-    }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
 
-    .button:hover,
-    input[type="submit"]:hover,
-    input[type="reset"]:hover,
-    input[type="button"]:hover {
-      background: linear-gradient(135deg, #1f1f1f 0%, #0f0f0f 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-      color: #ffffff;
-    }
+        @keyframes fadeInLine {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
 
-    .button:active,
-    input[type="submit"]:active,
-    input[type="reset"]:active,
-    input[type="button"]:active {
-      transform: translateY(0);
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    }
+        /* Main Content */
+        .main-content {
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
 
-    .button.secondary {
-      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-      color: #2d2d2d;
-      border: 2px solid #2d2d2d;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    }
+        .main-content.visible {
+            opacity: 1;
+        }
 
-    .button.secondary:hover {
-      background: linear-gradient(135deg, #2d2d2d 0%, #1f1f1f 100%);
-      color: #ffffff;
-      border-color: #1f1f1f;
-    }
+        /* Header Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--dark-gray-900) 0%, var(--dark-gray-800) 50%, var(--primary-purple-dark) 100%);
+            color: var(--white);
+            padding: 6rem 0 8rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .slideshow-nav-btn {
-      position: absolute;
-      top: 50%;
-      background: rgba(45, 45, 45, 0.8);
-      color: white;
-      border: none;
-      padding: 12px 16px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 18px;
-      transition: all 0.3s ease;
-      z-index: 10;
-    }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
 
-    .slideshow-nav-btn:hover {
-      background: rgba(45, 45, 45, 1);
-      transform: translateY(-50%) scale(1.1);
-    }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
 
-    .slideshow-nav-btn.prev {
-      left: 15px;
-      transform: translateY(-50%);
-    }
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 2rem;
+            border: 4px solid var(--primary-purple);
+            box-shadow: var(--shadow-xl);
+            transition: transform 0.3s ease;
+        }
 
-    .slideshow-nav-btn.next {
-      right: 15px;
-      transform: translateY(-50%);
-    }
+        .profile-image:hover {
+            transform: scale(1.05);
+        }
 
-    .feature img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 6px;
-      transition: transform 0.3s ease;
-    }
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--white) 0%, var(--secondary-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-    .feature img:hover {
-      transform: scale(1.02);
-    }
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--dark-gray-300);
+            margin-bottom: 0;
+            font-weight: 400;
+        }
 
-    .feature .content {
-      padding: 2.5em;
-    }
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
 
-    .feature .content h3 {
-      color: #1a1a1a;
-      margin-bottom: 0.5em;
-    }
+        /* Skills Section */
+        .skills-section {
+            padding: 5rem 0;
+            background: var(--dark-gray-100);
+        }
 
-    .feature .content h4 {
-      color: #333333;
-      font-size: 1.1em;
-      margin-top: 1.5em;
-      margin-bottom: 0.5em;
-    }
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
 
-    #contact-footer {
-      background: linear-gradient(135deg, #2d2d2d 0%, #1f1f1f 100%);
-      color: white;
-      padding: 3em 0;
-      margin-top: 4em;
-    }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-gray-900);
+            margin-bottom: 1rem;
+        }
 
-    #contact-footer h3 {
-      color: white;
-      margin-bottom: 1em;
-    }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
 
-    #contact-footer .button {
-      background: rgba(255, 255, 255, 0.2);
-      border: 2px solid white;
-      color: white;
-      backdrop-filter: blur(10px);
-    }
+        .skill-tag {
+            background: var(--primary-purple);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+        }
 
-    #contact-footer .button:hover {
-      background: white;
-      color: #2d2d2d;
-    }
-  </style>
+        .skill-tag:hover {
+            background: var(--primary-purple-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Portfolio Section */
+        .portfolio-section {
+            padding: 5rem 0;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .portfolio-card {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid var(--dark-gray-200);
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .card-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            min-height: 250px;
+        }
+
+        .card-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-card:hover .card-image img {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--dark-gray-900);
+            margin-bottom: 1rem;
+        }
+
+        .card-description {
+            color: var(--dark-gray-600);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .card-subtitle {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark-gray-800);
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .card-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card-list li {
+            color: var(--dark-gray-600);
+            padding: 0.25rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .card-list li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--primary-purple);
+            font-size: 0.8rem;
+        }
+
+        /* Button System */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 2rem;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            min-width: 140px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-purple-dark) 100%);
+            color: var(--white);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary-purple-dark) 0%, var(--primary-purple) 100%);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            color: var(--white);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary-purple);
+            border: 2px solid var(--primary-purple);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-purple);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--dark-gray-700);
+            border: 2px solid var(--dark-gray-300);
+        }
+
+        .btn-outline:hover {
+            background: var(--dark-gray-700);
+            color: var(--white);
+            border-color: var(--dark-gray-700);
+            transform: translateY(-2px);
+        }
+
+        /* Slideshow */
+        .slideshow-wrapper {
+            position: relative;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2rem;
+        }
+
+        .slideshow-container {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide {
+            width: 100%;
+            height: 400px;
+            flex-shrink: 0;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--white);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .slide-nav:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slide-nav.prev { left: 1rem; }
+        .slide-nav.next { right: 1rem; }
+
+        .slide-indicators {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator:hover {
+            background: rgba(255, 255, 255, 0.8);
+            transform: scale(1.2);
+        }
+
+        .indicator.active {
+            background: var(--white);
+            transform: scale(1.3);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, var(--dark-gray-800) 0%, var(--dark-gray-900) 100%);
+            color: var(--white);
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .contact-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .contact-description {
+            font-size: 1.2rem;
+            color: var(--dark-gray-300);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-section .btn-primary {
+            background: var(--white);
+            color: var(--dark-gray-800);
+            font-weight: 600;
+        }
+
+        .contact-section .btn-primary:hover {
+            background: var(--dark-gray-100);
+            color: var(--dark-gray-900);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .card-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .card-image {
+                height: 250px;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+
+            .slide-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .slide-nav.prev { left: 0.5rem; }
+            .slide-nav.next { right: 0.5rem; }
+
+            .terminal-content {
+                font-size: 1rem;
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                padding: 4rem 0 6rem;
+            }
+
+            .profile-image {
+                width: 120px;
+                height: 120px;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .card-content {
+                padding: 1.5rem;
+            }
+
+            .slide {
+                height: 300px;
+            }
+        }
+
+        /* Utility Classes */
+        .hidden { display: none; }
+        .text-center { text-align: center; }
+        .mb-2 { margin-bottom: 2rem; }
+    </style>
 </head>
-<body class="is-preload">
-
-  <div id="header">
-    <img src="images/Headshot.jpeg" alt="Blake Coppens Headshot" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin-bottom: 1em; border: 4px solid rgba(255,255,255,0.3);">
-    <h1>Blake Coppens</h1>
-    <h2>Student @ University of Florida<br />Computer Science</h2>
-  </div>
-
-  <div id="main">
-    <header class="major container medium">
-      <h2>Skills & Expertise</h2>
-      <h1>Semantic Kernel, OpenAI, DALL-E<br />Python, Microsoft MTA Java, C++<br />HTML, CSS</h1>
-    </header>
-
-    <div class="box alt container">
-      <section class="feature left">
-        <a href="Blake Coppens Resume Updated.pdf">
-          <img src="images/resume.JPG" alt="Resume thumbnail" class="uniform-icon" />
-        </a>
-        <div class="content">
-          <h3>Resume</h3>
-          <p>My detailed professional background, education, and experience showcasing my journey in computer science and technology.</p>
-          <ul class="actions small">
-            <li><a href="Blake Coppens Resume Updated.pdf" class="button">View Resume</a></li>
-          </ul>
+<body>
+    <!-- Terminal Loading Screen -->
+    <div class="terminal-loader" id="terminalLoader">
+        <div class="terminal-content">
+            <div class="terminal-line">$ whoami</div>
+            <div class="terminal-line">blake_coppens</div>
+            <div class="terminal-line">$ cat skills.txt</div>
+            <div class="terminal-line">Python | Java | C++ | JavaScript</div>
+            <div class="terminal-line">OpenAI | Semantic Kernel | DALL-E</div>
+            <div class="terminal-line">$ ls projects/</div>
+            <div class="terminal-line">edu_africa/ machine_learning/ web_dev/</div>
+            <div class="terminal-line">$ echo "Welcome to my portfolio"</div>
+            <div class="terminal-line">Welcome to my portfolio</div>
+            <div class="terminal-line">$ loading_portfolio.sh</div>
+            <div class="terminal-line">Loading<span class="cursor"></span></div>
         </div>
-      </section>
     </div>
 
-    <div class="box alt container">
-      <section class="feature left">
-        <a href="https://www.linkedin.com/in/blakecoppens/">
-          <img src="images/Linkedin.jpg" alt="LinkedIn logo" class="uniform-icon" />
-        </a>
-        <div class="content">
-          <h3>LinkedIn</h3>
-          <p>Connect with me on LinkedIn to see my professional network, endorsements, and career progression in the tech industry.</p>
-          <ul class="actions small">
-            <li><a href="https://www.linkedin.com/in/blakecoppens/" class="button">Connect on LinkedIn</a></li>
-          </ul>
-        </div>
-      </section>
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <img src="images/Headshot.jpeg" alt="Blake Coppens" class="profile-image">
+                <h1 class="hero-title">Blake Coppens</h1>
+                <p class="hero-subtitle">Computer Science Student @ University of Florida</p>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="skills-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Technical Expertise</h2>
+                    <div class="skills-grid">
+                        <div class="skill-tag">Semantic Kernel</div>
+                        <div class="skill-tag">OpenAI</div>
+                        <div class="skill-tag">DALL-E</div>
+                        <div class="skill-tag">Python</div>
+                        <div class="skill-tag">Java</div>
+                        <div class="skill-tag">C++</div>
+                        <div class="skill-tag">HTML</div>
+                        <div class="skill-tag">CSS</div>
+                        <div class="skill-tag">JavaScript</div>
+                        <div class="skill-tag">Machine Learning</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section class="portfolio-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Portfolio & Experience</h2>
+                </div>
+
+                <div class="portfolio-grid">
+                    <!-- Resume Card -->
+                    <div class="portfolio-card">
+                        <div class="card-layout">
+                            <div class="card-image">
+                                <img src="images/resume.JPG" alt="Resume Preview">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Professional Resume</h3>
+                                <p class="card-description">
+                                    Comprehensive overview of my academic achievements, technical skills, and professional experience in computer science and software development.
+                                </p>
+                                <a href="Blake Coppens Resume Updated.pdf" class="btn btn-primary">View Resume</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LinkedIn Card -->
+                    <div class="portfolio-card">
+                        <div class="card-layout">
+                            <div class="card-image">
+                                <img src="images/Linkedin.jpg" alt="LinkedIn Profile">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">LinkedIn Network</h3>
+                                <p class="card-description">
+                                    Connect with me professionally to explore my network, endorsements, and career journey in technology and computer science.
+                                </p>
+                                <a href="https://www.linkedin.com/in/blakecoppens/" class="btn btn-secondary">Connect on LinkedIn</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Projects Card -->
+                    <div class="portfolio-card">
+                        <div class="card-layout">
+                            <div class="card-image">
+                                <img src="images/Project.JPG" alt="Projects Overview">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Project Portfolio</h3>
+                                <p class="card-description">
+                                    Explore my collection of academic and personal projects showcasing problem-solving skills, technical expertise, and creative solutions.
+                                </p>
+                                <a href="https://docs.google.com/spreadsheets/d/19zlLa5G1WLv4eOXFN6ilxFpu_NCJ99fHdLCieVRKkTw/edit?gid=0#gid=0" class="btn btn-outline">View Projects</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- EDU Africa Card -->
+                    <div class="portfolio-card">
+                        <div class="card-layout">
+                            <div class="slideshow-wrapper">
+                                <div class="slideshow-container" id="slideshowContainer">
+                                    <div class="slide">
+                                        <img src="images/edu1.jpg" alt="EDU Africa Experience 1">
+                                    </div>
+                                    <div class="slide">
+                                        <img src="images/edu2.jpg" alt="EDU Africa Experience 2">
+                                    </div>
+                                    <div class="slide">
+                                        <img src="images/edu3.jpg" alt="EDU Africa Experience 3">
+                                    </div>
+                                </div>
+                                <button class="slide-nav prev" onclick="changeSlide(-1)">‹</button>
+                                <button class="slide-nav next" onclick="changeSlide(1)">›</button>
+                                <div class="slide-indicators">
+                                    <span class="indicator active" onclick="currentSlide(1)"></span>
+                                    <span class="indicator" onclick="currentSlide(2)"></span>
+                                    <span class="indicator" onclick="currentSlide(3)"></span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">EDU Africa Experience</h3>
+                                <p class="card-description">
+                                    <em>"Live as if you were to die tomorrow. Learn as if you were to live forever."</em>
+                                </p>
+                                
+                                <h4 class="card-subtitle">Project Overview</h4>
+                                <p class="card-description">
+                                    Transformative service-learning experience that expanded my understanding of cultural awareness, global community needs, and the intersection of technology and social impact.
+                                </p>
+
+                                <h4 class="card-subtitle">Key Achievements</h4>
+                                <p class="card-description">
+                                    Developed cross-cultural communication, leadership, and adaptability skills while implementing digital literacy modules using open-source tools and gamified learning approaches.
+                                </p>
+
+                                <h4 class="card-subtitle">Lessons Learned</h4>
+                                <ul class="card-list">
+                                    <li>Flexibility and humility are essential in global work</li>
+                                    <li>Listen more than you speak; communities know their needs best</li>
+                                    <li>Small skills can have big impacts when shared with others</li>
+                                    <li>Technology solutions must be culturally sensitive and locally relevant</li>
+                                </ul>
+
+                                <h4 class="card-subtitle">Acknowledgements</h4>
+                                <p class="card-description">
+                                    Special thanks to Dr. Sanethia Thomas, Ping Neo, Naomi Harrell, EDU Africa, and the entire Serving Organization Team.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <div class="container">
+                <h2 class="contact-title">Let's Connect</h2>
+                <p class="contact-description">
+                    Ready to collaborate on exciting projects or discuss opportunities in technology? I'd love to hear from you.
+                </p>
+                <a href="mailto:blakecoppensbusiness@gmail.com" class="btn btn-primary">Send Email</a>
+            </div>
+        </section>
     </div>
 
-    <div class="box alt container">
-      <section class="feature left">
-        <a href="https://docs.google.com/spreadsheets/d/19zlLa5G1WLv4eOXFN6ilxFpu_NCJ99fHdLCieVRKkTw/edit?gid=0#gid=0">
-          <img src="images/Project.JPG" alt="Project icon" class="uniform-icon" />
-        </a>
-        <div class="content">
-          <h3>My Projects</h3>
-          <p>Explore a comprehensive collection of my personal and academic projects, showcasing my technical skills and creative problem-solving abilities.</p>
-          <ul class="actions small">
-            <li><a href="https://docs.google.com/spreadsheets/d/19zlLa5G1WLv4eOXFN6ilxFpu_NCJ99fHdLCieVRKkTw/edit?gid=0#gid=0" class="button">View Projects</a></li>
-          </ul>
-        </div>
-      </section>
-    </div>
+    <script>
+        // Terminal Loading Animation
+        const terminalLines = document.querySelectorAll('.terminal-line');
+        const terminalLoader = document.getElementById('terminalLoader');
+        const mainContent = document.getElementById('mainContent');
 
-    <div class="box alt container">
-      <section class="feature left">
-        <div class="slideshow-wrapper">
-          <div class="slideshow-container">
-            <img class="edu-slide active" src="images/edu1.jpg" alt="EDU Africa slide 1" />
-            <img class="edu-slide" src="images/edu2.jpg" alt="EDU Africa slide 2" />
-            <img class="edu-slide" src="images/edu3.jpg" alt="EDU Africa slide 3" />
-          </div>
-          <button class="slideshow-nav-btn prev" onclick="prevSlide()">&#10094;</button>
-          <button class="slideshow-nav-btn next" onclick="nextSlide()">&#10095;</button>
-          <div class="dot-navigation">
-            <span class="dot active" onclick="setSlide(0)"></span>
-            <span class="dot" onclick="setSlide(1)"></span>
-            <span class="dot" onclick="setSlide(2)"></span>
-          </div>
-        </div>
+        let lineIndex = 0;
+        const typeSpeed = 100;
+        const lineDelay = 800;
 
-        <div class="content">
-          <h3>EDU Africa</h3>
-          <p><em>"Live as if you were to die tomorrow. Learn as if you were to live forever."</em></p>
+        function showNextLine() {
+            if (lineIndex < terminalLines.length) {
+                terminalLines[lineIndex].style.animationDelay = `${lineIndex * 0.1}s`;
+                terminalLines[lineIndex].classList.add('visible');
+                lineIndex++;
+                setTimeout(showNextLine, lineDelay);
+            } else {
+                // All lines shown, hide terminal and show main content
+                setTimeout(() => {
+                    terminalLoader.classList.add('hidden');
+                    mainContent.classList.add('visible');
+                }, 1500);
+            }
+        }
 
-          <h4>Project Overview</h4>
-          <p>During my time with EDU Africa, I took part in a transformative service-learning experience that broadened my understanding of cultural awareness, global community needs, and the intersection of technology and social good.</p>
+        // Start the terminal animation
+        setTimeout(showNextLine, 500);
 
-          <h4>Key Achievements</h4>
-          <p>Developed cross-cultural communication, leadership, and adaptability skills while implementing a digital literacy module for students using open-source tools and gamified learning approaches.</p>
+        // Slideshow Functionality
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const indicators = document.querySelectorAll('.indicator');
+        const slideshowContainer = document.getElementById('slideshowContainer');
 
-          <h4>Lessons Learned</h4>
-          <ul>
-            <li>Flexibility and humility are essential in global work</li>
-            <li>Listen more than you speak; communities know their needs best</li>
-            <li>Small skills can have big impacts when shared with others</li>
-            <li>Technology solutions must be culturally sensitive and locally relevant</li>
-          </ul>
+        function showSlide(index) {
+            slideIndex = index;
+            if (slideIndex >= slides.length) slideIndex = 0;
+            if (slideIndex < 0) slideIndex = slides.length - 1;
 
-          <h4>Acknowledgements</h4>
-          <p>Special thanks to Dr. Sanethia Thomas, Ping Neo, Naomi Harrell, EDU Africa, and the entire Serving Organization Team for making this experience possible.</p>
-        </div>
-      </section>
-    </div>
-  </div>
+            const translateX = -slideIndex * 100;
+            slideshowContainer.style.transform = `translateX(${translateX}%)`;
 
-  <script src="assets/js/jquery.min.js"></script>
-  <script src="assets/js/browser.min.js"></script>
-  <script src="assets/js/breakpoints.min.js"></script>
-  <script src="assets/js/util.js"></script>
-  <script src="assets/js/main.js"></script>
-  <script>
-    let currentSlide = 0;
-    const slides = document.querySelectorAll(".edu-slide");
-    const dots = document.querySelectorAll(".dot");
-    const slideshowContainer = document.querySelector(".slideshow-container");
+            // Update indicators
+            indicators.forEach((indicator, i) => {
+                indicator.classList.toggle('active', i === slideIndex);
+            });
+        }
 
-    function showSlide(index) {
-      if (index >= slides.length) currentSlide = 0;
-      else if (index < 0) currentSlide = slides.length - 1;
-      else currentSlide = index;
+        function changeSlide(direction) {
+            showSlide(slideIndex + direction);
+        }
 
-      slideshowContainer.style.transform = `translateX(${-currentSlide * 100}%)`;
-      dots.forEach((dot, i) => {
-        dot.classList.toggle("active", i === currentSlide);
-      });
-    }
+        function currentSlide(index) {
+            showSlide(index - 1);
+        }
 
-    function nextSlide() { showSlide(currentSlide + 1); }
-    function prevSlide() { showSlide(currentSlide - 1); }
-    function setSlide(index) { showSlide(index); }
+        // Auto-advance slideshow
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000);
 
-    setInterval(nextSlide, 5000);
-    document.addEventListener("DOMContentLoaded", () => { showSlide(0); });
-  </script>
+        // Initialize slideshow
+        showSlide(0);
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe portfolio cards for scroll animations
+        document.querySelectorAll('.portfolio-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
 </body>
 </html>
