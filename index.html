@@ -269,6 +269,47 @@
             font-size: 0.8rem;
         }
 
+        /* EDU Africa Text-Only Card */
+        .edu-africa-card {
+            background: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+
+        .edu-africa-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        /* Standalone Slideshow Section */
+        .slideshow-section {
+            background: #f8fafc;
+            padding: 4rem 0;
+            margin-top: 2rem;
+        }
+
+        .slideshow-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 2rem;
+        }
+
+        .standalone-slideshow {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            background: #ffffff;
+        }
+
         /* Button System */
         .btn {
             display: inline-flex;
@@ -327,14 +368,6 @@
         }
 
         /* Slideshow */
-        .slideshow-wrapper {
-            position: relative;
-            border-radius: 1rem;
-            overflow: hidden;
-            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            margin-bottom: 2rem;
-        }
-
         .slideshow-container {
             display: flex;
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -342,7 +375,7 @@
 
         .slide {
             width: 100%;
-            height: 400px;
+            height: 500px;
             flex-shrink: 0;
         }
 
@@ -359,13 +392,14 @@
             background: rgba(0, 0, 0, 0.7);
             color: #ffffff;
             border: none;
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
+            z-index: 10;
         }
 
         .slide-nav:hover {
@@ -373,21 +407,22 @@
             transform: translateY(-50%) scale(1.1);
         }
 
-        .slide-nav.prev { left: 1rem; }
-        .slide-nav.next { right: 1rem; }
+        .slide-nav.prev { left: 1.5rem; }
+        .slide-nav.next { right: 1.5rem; }
 
         .slide-indicators {
             position: absolute;
-            bottom: 1rem;
+            bottom: 2rem;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 0.5rem;
+            gap: 0.75rem;
+            z-index: 10;
         }
 
         .indicator {
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.5);
             cursor: pointer;
@@ -466,18 +501,25 @@
                 gap: 1rem;
             }
 
-            .slide-nav {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
+            .slide {
+                height: 350px;
             }
 
-            .slide-nav.prev { left: 0.5rem; }
-            .slide-nav.next { right: 0.5rem; }
+            .slide-nav {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
 
-            .terminal-content {
-                font-size: 1rem;
-                padding: 1rem;
+            .slide-nav.prev { left: 1rem; }
+            .slide-nav.next { right: 1rem; }
+
+            .edu-africa-card {
+                padding: 2rem;
+            }
+
+            .slideshow-section {
+                padding: 3rem 0;
             }
         }
 
@@ -506,29 +548,20 @@
             .slide {
                 height: 300px;
             }
+
+            .edu-africa-card {
+                padding: 1.5rem;
+            }
+
+            .slideshow-title {
+                font-size: 1.5rem;
+            }
         }
 
         /* Utility Classes */
         .hidden { display: none; }
         .text-center { text-align: center; }
         .mb-2 { margin-bottom: 2rem; }
-
-        /* Special layout for EDU Africa card */
-        .portfolio-card.edu-africa .card-layout {
-            grid-template-columns: 500px 1fr;
-        }
-
-        @media (max-width: 1024px) {
-            .portfolio-card.edu-africa .card-layout {
-                grid-template-columns: 450px 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .portfolio-card.edu-africa .card-layout {
-                grid-template-columns: 1fr;
-            }
-        }
     </style>
 </head>
 <body>
@@ -620,71 +653,74 @@
                         </div>
                     </div>
 
-                    <!-- EDU Africa Card -->
-                    <div class="portfolio-card edu-africa">
-                        <div class="card-layout">
-                            <div class="slideshow-wrapper">
-                                <div class="slideshow-container" id="slideshowContainer">
-                                    <div class="slide">
-                                        <img src="images/eduafrica1.jpeg" alt="EDU Africa Experience 1">
-                                    </div>
-                                    <div class="slide">
-                                        <img src="images/eduafrica2.jpg" alt="EDU Africa Experience 2">
-                                    </div>
-                                    <div class="slide">
-                                        <img src="images/eduafrica3.jpg" alt="EDU Africa Experience 3">
-                                    </div>
-                                </div>
-                                <button class="slide-nav prev" onclick="changeSlide(-1)">‹</button>
-                                <button class="slide-nav next" onclick="changeSlide(1)">›</button>
-                                <div class="slide-indicators">
-                                    <span class="indicator active" onclick="currentSlide(1)"></span>
-                                    <span class="indicator" onclick="currentSlide(2)"></span>
-                                    <span class="indicator" onclick="currentSlide(3)"></span>
-                                </div>
-                            </div>
-                            <div class="card-content">
-                                <h3 class="card-title">EDU Africa Experience</h3>
-                                <p class="card-description">
-                                    <em>"Live as if you were to die tomorrow. Learn as if you were to live forever."</em>
-                                </p>
+                    <!-- EDU Africa Text Content Card -->
+                    <div class="edu-africa-card">
+                        <h3 class="card-title">EDU Africa Experience</h3>
+                        <p class="card-description">
+                            <em>"Live as if you were to die tomorrow. Learn as if you were to live forever."</em>
+                        </p>
 
-                                <h4 class="card-subtitle">Project Overview</h4>
-                                <p class="card-description">
-                                    Created a full Stack LMS for YMCA Athlone, South Africa, which focused on addressing the digital divide in underserved communities. The project involved using APIs, open-source tools, LAMP stack and more to create an intuitive platform for learners.
-                                </p>
+                        <h4 class="card-subtitle">Project Overview</h4>
+                        <p class="card-description">
+                            Created a full Stack LMS for YMCA Athlone, South Africa, which focused on addressing the digital divide in underserved communities. The project involved using APIs, open-source tools, LAMP stack and more to create an intuitive platform for learners.
+                        </p>
 
-                                <h4 class="card-subtitle">Global Learning, Skills Acquired & Achievements</h4>
-                                <p class="card-description">
-                                    One of the most impactful parts of this experience was learning how to adapt my technical knowledge to suit users with varying levels of digital and traditional literacy. Designing for accessibility forced me to think more critically about user experience and simplicity. I also developed leadership skills by guiding my team through tough challenges, new experiences, and cross-cultural collaboration. From debugging backend issues to optimizing frontend responsiveness, the hands-on coding experience refined both my technical skills and my ability to deliver real-world solutions.
-                                </p>
+                        <h4 class="card-subtitle">Global Learning, Skills Acquired & Achievements</h4>
+                        <p class="card-description">
+                            One of the most impactful parts of this experience was learning how to adapt my technical knowledge to suit users with varying levels of digital and traditional literacy. Designing for accessibility forced me to think more critically about user experience and simplicity. I also developed leadership skills by guiding my team through tough challenges, new experiences, and cross-cultural collaboration. From debugging backend issues to optimizing frontend responsiveness, the hands-on coding experience refined both my technical skills and my ability to deliver real-world solutions.
+                        </p>
 
-                                <h4 class="card-subtitle">Highlights & Reflections</h4>
-                                <p class="card-description">
-                                    One of the most profound aspects of this journey was spending time with the local communities and directly engaging with the students our platform was built to support. Seeing their curiosity and excitement when using the tools we created made the impact of our work feel incredibly real. It reminded me that software development isn't just about code, it's about people. Witnessing firsthand how technology can open new doors was inspiring, and it reinforced my belief that thoughtful innovation can inspire both local and global change.
-                                </p>
+                        <h4 class="card-subtitle">Highlights & Reflections</h4>
+                        <p class="card-description">
+                            One of the most profound aspects of this journey was spending time with the local communities and directly engaging with the students our platform was built to support. Seeing their curiosity and excitement when using the tools we created made the impact of our work feel incredibly real. It reminded me that software development isn't just about code, it's about people. Witnessing firsthand how technology can open new doors was inspiring, and it reinforced my belief that thoughtful innovation can inspire both local and global change.
+                        </p>
 
-                                <h4 class="card-subtitle">Most Memorable Experience</h4>
-                                <p class="card-description">
-                                    Visiting Khayelitsha was one of the most eye-opening moments of the entire trip. Walking through the township, I withnessed the reality of informal settlements. Homes were built from scrap material, limited access to infrastructure, and challenging living conditions. Yet, in the midst of hardship, what stood out most was the resilience and spirit of the people. There was an undeniable sense of community, innovation, and determination to thrive despite systemic challenges. This sense of pride deepened my commitment to using technology as a tool for empowerment and equity.
-                                </p>
+                        <h4 class="card-subtitle">Most Memorable Experience</h4>
+                        <p class="card-description">
+                            Visiting Khayelitsha was one of the most eye-opening moments of the entire trip. Walking through the township, I witnessed the reality of informal settlements. Homes were built from scrap material, limited access to infrastructure, and challenging living conditions. Yet, in the midst of hardship, what stood out most was the resilience and spirit of the people. There was an undeniable sense of community, innovation, and determination to thrive despite systemic challenges. This sense of pride deepened my commitment to using technology as a tool for empowerment and equity.
+                        </p>
 
-                                <h4 class="card-subtitle">Lessons Learned, Advice & Tips</h4>
-                                <ul class="card-list">
-                                    <li>Adaptability is your greatest tool</li>
-                                    <li>Learning your client and how your project affects them is a powerful tool</li>
-                                    <li>Keep an open mind while developing and don't be afraid to pivot</li>
-                                    <li>Coding isn't only for apps, it can also be solutions to real problems</li>
-                                    <li><strong>Advice:</strong> Follow AGILE methodologies, they exist for a reason</li>
-                                    <li><strong>Tip:</strong> Communicate constantly with your team.</li>
-                                </ul>
+                        <h4 class="card-subtitle">Lessons Learned, Advice & Tips</h4>
+                        <ul class="card-list">
+                            <li>Adaptability is your greatest tool</li>
+                            <li>Learning your client and how your project affects them is a powerful tool</li>
+                            <li>Keep an open mind while developing and don't be afraid to pivot</li>
+                            <li>Coding isn't only for apps, it can also be solutions to real problems</li>
+                            <li><strong>Advice:</strong> Follow AGILE methodologies, they exist for a reason</li>
+                            <li><strong>Tip:</strong> Communicate constantly with your team.</li>
+                        </ul>
 
-                                <h4 class="card-subtitle">Acknowledgements</h4>
-                                <p class="card-description">
-                                    Special thanks to Dr. Sanethia Thomas, Ping Neo, Naomi Harrell, EDU Africa, and the entire Serving Organization Team.
-                                </p>
-                            </div>
+                        <h4 class="card-subtitle">Acknowledgements</h4>
+                        <p class="card-description">
+                            Special thanks to Dr. Sanethia Thomas, Ping Neo, Naomi Harrell, EDU Africa, and the entire Serving Organization Team.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Standalone Slideshow Section -->
+        <section class="slideshow-section">
+            <div class="container">
+                <h2 class="slideshow-title">EDU Africa Photo Gallery</h2>
+                <div class="standalone-slideshow">
+                    <div class="slideshow-container" id="slideshowContainer">
+                        <div class="slide">
+                            <img src="images/eduafrica1.jpeg" alt="EDU Africa Experience 1">
                         </div>
+                        <div class="slide">
+                            <img src="images/eduafrica2.jpg" alt="EDU Africa Experience 2">
+                        </div>
+                        <div class="slide">
+                            <img src="images/eduafrica3.jpg" alt="EDU Africa Experience 3">
+                        </div>
+                    </div>
+                    <button class="slide-nav prev" onclick="changeSlide(-1)">‹</button>
+                    <button class="slide-nav next" onclick="changeSlide(1)">›</button>
+                    <div class="slide-indicators">
+                        <span class="indicator active" onclick="currentSlide(1)"></span>
+                        <span class="indicator" onclick="currentSlide(2)"></span>
+                        <span class="indicator" onclick="currentSlide(3)"></span>
                     </div>
                 </div>
             </div>
@@ -769,7 +805,7 @@
         }, observerOptions);
 
         // Observe portfolio cards for scroll animations
-        document.querySelectorAll('.portfolio-card').forEach(card => {
+        document.querySelectorAll('.portfolio-card, .edu-africa-card').forEach(card => {
             card.style.opacity = '0';
             card.style.transform = 'translateY(30px)';
             card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
